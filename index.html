@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workdrill | Redes Subterrâneas e Engenharia de Alta Performance</title>
+    <meta name="description" content="Referência em engenharia de infraestrutura subterrânea, Perfuração Horizontal Dirigida (MND) e telecomunicações. Autonomia completa com equipe própria CLT e frota moderna em São Paulo.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet.js Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <!-- Animated SVG Logo -->
+            <svg class="loader-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <g id="gear-tooth">
+                        <path d="M47,2 L53,2 L54,7 L46,7 Z" fill="currentColor"/>
+                    </g>
+                </defs>
+                <!-- Gear teeth (24 teeth, rotated every 15 deg) -->
+                <g class="gear-rotate" fill="var(--color-primary)">
+                    <circle cx="50" cy="50" r="41" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <use href="#gear-tooth" transform="rotate(0 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(15 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(30 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(45 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(60 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(75 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(90 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(105 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(120 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(135 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(150 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(165 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(180 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(195 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(210 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(225 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(240 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(255 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(270 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(285 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(300 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(315 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(330 50 50)"/>
+                    <use href="#gear-tooth" transform="rotate(345 50 50)"/>
+                    
+                    <circle cx="50" cy="50" r="32" fill="var(--bg-primary)" stroke="currentColor" stroke-width="1.5"/>
+                </g>
+                <!-- Crossed Hammer and Pickaxe -->
+                <g class="tools-draw" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none">
+                    <!-- Pickaxe (rotated 45deg) -->
+                    <path d="M30,70 L65,35" stroke="var(--color-text-main)"/> <!-- Handle -->
+                    <path d="M54,27 C59,29 68,36 71,41 C66,38 57,31 54,27 Z" fill="var(--color-primary)" stroke="none"/> <!-- Blade -->
+                    <!-- Hammer (rotated -45deg) -->
+                    <path d="M70,70 L35,35" stroke="var(--color-text-main)"/> <!-- Handle -->
+                    <path d="M26,30 L32,24 L39,31 L33,37 Z" fill="var(--color-primary)" stroke="none"/> <!-- Head -->
+                </g>
+            </svg>
+            <div class="loader-brand">WORKDRILL</div>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#home" class="brand-logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <use href="#gear-tooth" transform="rotate(0 50 50)"/>
+                    <circle cx="50" cy="50" r="41" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <!-- Simplified Crossed Tools for small size -->
+                    <path d="M32,68 L68,32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M68,68 L32,32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="28" fill="var(--bg-secondary)"/>
+                </svg>
+                <span class="brand-text">WORKDRILL</span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#quem-somos" class="nav-link">Quem Somos</a>
+                <a href="#servicos" class="nav-link">Serviços</a>
+                <a href="#estrutura" class="nav-link">Estrutura</a>
+                <a href="#operacoes" class="nav-link">Operações</a>
+                <a href="#clientes" class="nav-link">Clientes</a>
+                <a href="#contato" class="nav-link">Contato</a>
+                <a href="#contato" class="btn btn-primary btn-mobile-only">Solicitar Orçamento</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#contato" class="btn btn-outline-primary header-btn">Solicitar Orçamento</a>
+                <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        
+        <!-- HERO SECTION -->
+        <section id="home" class="hero-section">
+            <div class="hero-bg-slider">
+                <!-- Real Workdrill images used here as background slides -->
+                <div class="hero-slide active" style="background-image: url('7.jpeg')"></div>
+                <div class="hero-slide" style="background-image: url('3.jpeg')"></div>
+                <div class="hero-slide" style="background-image: url('6.jpeg')"></div>
+            </div>
+            
+            <div class="hero-overlay"></div>
+            
+            <div class="hero-content container">
+                <span class="hero-badge reveal-fade"><i class="fa-solid fa-helmet-safety"></i> Engenharia Pesada Subterrânea</span>
+                <h1 class="hero-title reveal-fade-up">
+                    Especialistas em Construção de <span class="text-gradient">Redes Subterrâneas</span> e Engenharia de Alta Performance
+                </h1>
+                <p class="hero-subtitle reveal-fade-up">
+                    Soluções completas de engenharia subterrânea com Perfuração Horizontal Dirigida (MND), infraestrutura óptica e redes de telecomunicação, pautadas em rigor técnico e total segurança operacional.
+                </p>
+                <div class="hero-ctas reveal-fade-up">
+                    <a href="#servicos" class="btn btn-primary btn-lg">Conheça Nossos Serviços</a>
+                    <a href="#contato" class="btn btn-secondary btn-lg">Fale com um Especialista <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Statistics Banner -->
+            <div class="hero-stats">
+                <div class="stats-container container">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="1000">0</span><span class="stat-suffix">km+</span>
+                        <span class="stat-label">De Redes Subterrâneas Executadas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                        <span class="stat-label">Frota e Equipamentos Próprios</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="150">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Profissionais CLT Especializados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                        <span class="stat-label">Autonomia Logística em SP</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUEM SOMOS -->
+        <section id="quem-somos" class="section-padding about-section">
+            <div class="container">
+                <div class="grid grid-2-col">
+                    <div class="about-info reveal-left">
+                        <span class="section-tag">Quem Somos</span>
+                        <h2 class="section-title">Engenharia de Precisão e Autonomia Operacional Completa</h2>
+                        <p class="section-desc">
+                            Com foco em engenharia de alta performance e rigor técnico, a <strong>Workdrill</strong> lidera a execução de obras de infraestrutura subterrânea e redes de telecomunicação de grande porte. Unimos equipamentos de última geração e tecnologia em MND (Método Não Destrutivo) a uma equipe própria altamente qualificada, garantindo precisão absoluta, mitigação de riscos e cumprimento rigoroso de cronogramas.
+                        </p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item-inline">
+                                <div class="feature-icon"><i class="fa-solid fa-users-gear"></i></div>
+                                <div>
+                                    <h3>Corpo Técnico Próprio (100% CLT)</h3>
+                                    <p>Garantia de segurança jurídica, conformidade com as normas regulamentadoras (NRs) e treinamento contínuo, assegurando alta qualidade e zero terceirização operacional.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item-inline">
+                                <div class="feature-icon"><i class="fa-solid fa-truck-monster"></i></div>
+                                <div>
+                                    <h3>Frota e Perfuratrizes Próprias</h3>
+                                    <p>Autonomia operacional irrestrita. Dispomos de maquinário pesado moderno e veículos próprios de suporte logístico, eliminando gargalos de locação e atrasos.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item-inline">
+                                <div class="feature-icon"><i class="fa-solid fa-route"></i></div>
+                                <div>
+                                    <h3>Logística Estratégica e Capilaridade</h3>
+                                    <p>Capacidade de mobilização rápida e suporte operacional ágil em todo o território de São Paulo, inclusive em áreas de alta complexidade urbana.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-visual reveal-right">
+                        <div class="img-frame">
+                            <!-- Real image of office structure -->
+                            <img src="4.jpeg" alt="Escritório corporativo da Workdrill" class="about-img">
+                            <div class="visual-badge">
+                                <span class="badge-num">SP</span>
+                                <span class="badge-txt">Atuação em todo o estado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Milestones Timeline -->
+                <div class="timeline-container section-padding-top reveal-fade">
+                    <h3 class="timeline-header-title text-center">Nossos Pilares Operacionais</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Logística</div>
+                            <div class="timeline-content">
+                                <h4>Agilidade Logística</h4>
+                                <p>Mobilização ágil e capacidade de atendimento contínuo sob quaisquer condições climáticas e logísticas urbanas.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Segurança</div>
+                            <div class="timeline-content">
+                                <h4>Conformidade Técnica</h4>
+                                <p>Rígida conformidade técnica com normas da ABNT, NRs vigentes e exigências das principais concessionárias.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Engenharia</div>
+                            <div class="timeline-content">
+                                <h4>Telemetria e Precisão</h4>
+                                <p>Mapeamento tridimensional do solo via Georadar (GPR) e rádio-detecção para mitigação total de interferências.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVIÇOS -->
+        <section id="servicos" class="section-padding bg-secondary services-section">
+            <div class="container">
+                <div class="section-header text-center reveal-fade">
+                    <span class="section-tag">Portfólio de Serviços</span>
+                    <h2 class="section-title">Soluções Completas em Engenharia Subterrânea</h2>
+                    <p class="section-subtitle">Soluções integradas com corpo operacional próprio composto por engenheiros, projetistas, mapeadores e técnicos de lançamento de cabos ópticos.</p>
+                </div>
+                
+                <div class="services-grid grid grid-3-col">
+                    <!-- Service 1 -->
+                    <div class="service-card reveal-fade-up" data-service="mnd">
+                        <div class="card-bg" style="background-image: url('13.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-bore-hole"></i></div>
+                            <h3>Perfuração Horizontal Dirigida (MND)</h3>
+                            <p>Instalação de tubulações subterrâneas sem necessidade de abertura de valas a céu aberto...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="service-card reveal-fade-up" data-service="dutos">
+                        <div class="card-bg" style="background-image: url('2.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-circle-nodes"></i></div>
+                            <h3>Instalação de Dutos (MND/MD)</h3>
+                            <p>Métodos destrutivos e não destrutivos para implantação de tubulações em PEAD e termofusão...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="service-card reveal-fade-up" data-service="redes">
+                        <div class="card-bg" style="background-image: url('10.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+                            <h3>Redes Subterrâneas</h3>
+                            <p>Construção completa de infraestruturas subterrâneas para telecomunicações, saneamento e energia...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 4 -->
+                    <div class="service-card reveal-fade-up" data-service="cabos">
+                        <div class="card-bg" style="background-image: url('8.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-cable-car"></i></div>
+                            <h3>Lançamento de Cabos Ópticos</h3>
+                            <p>Lançamento de cabos ópticos aéreos e subterrâneos auto-sustentados com reforço mecânico...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 5 -->
+                    <div class="service-card reveal-fade-up" data-service="infra-optica">
+                        <div class="card-bg" style="background-image: url('9.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                            <h3>Infraestrutura Óptica</h3>
+                            <p>Implantação de anéis ópticos, entroncamentos metropolitanos e redes de acesso modernas...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 6 -->
+                    <div class="service-card reveal-fade-up" data-service="fusao">
+                        <div class="card-bg" style="background-image: url('15.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-circle-radiation"></i></div>
+                            <h3>Fusão de Fibra Óptica</h3>
+                            <p>Emendas de precisão por fusão de arco voltaico com alinhamento pelo núcleo da fibra...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 7 -->
+                    <div class="service-card reveal-fade-up" data-service="mapeamento">
+                        <div class="card-bg" style="background-image: url('12.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                            <h3>Mapeamento Subterrâneo</h3>
+                            <p>Detecção e cadastramento de redes de utilidade existentes para projetos de infraestrutura...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 8 -->
+                    <div class="service-card reveal-fade-up" data-service="georadar">
+                        <div class="card-bg" style="background-image: url('1.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-radar"></i></div>
+                            <h3>Georadar (GPR)</h3>
+                            <p>Varredura do solo com ondas eletromagnéticas de alta frequência (1 a 1000 MHz) para detectar interferências...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 9 -->
+                    <div class="service-card reveal-fade-up" data-service="caixas">
+                        <div class="card-bg" style="background-image: url('11.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-box-archive"></i></div>
+                            <h3>Instalação de Caixas Subterrâneas</h3>
+                            <p>Implantação de caixas de passagem e de emenda em calçadas e vias públicas, desde a topografia do solo...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 10 -->
+                    <div class="service-card reveal-fade-up" data-service="conectorizacao">
+                        <div class="card-bg" style="background-image: url('3.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-plug"></i></div>
+                            <h3>Conectorização de Cabos</h3>
+                            <p>Terminação e conectarização de cabos ópticos e coaxiais em caixas de emenda e distribuidores (DIO)...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 11 -->
+                    <div class="service-card reveal-fade-up" data-service="projetos-tecnicos">
+                        <div class="card-bg" style="background-image: url('4.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-file-signature"></i></div>
+                            <h3>Projetos Técnicos</h3>
+                            <p>Elaboração de plantas, perfis de furos direcionais, cronogramas físicos e estudos de viabilidade...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 12 -->
+                    <div class="service-card reveal-fade-up" data-service="manutencao">
+                        <div class="card-bg" style="background-image: url('16.jpeg')"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            <h3>Manutenção de Redes</h3>
+                            <p>Suporte completo, técnico e operacional para redes de transmissão ativas e manutenção preventiva...</p>
+                            <button class="btn btn-link">Saiba Mais <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTRUTURA E MAQUINÁRIOS -->
+        <section id="estrutura" class="section-padding structure-section">
+            <div class="container">
+                <div class="section-header text-center reveal-fade">
+                    <span class="section-tag">Estrutura Própria</span>
+                    <h2 class="section-title">Nossa Engenharia & Frota Pesada</h2>
+                    <p class="section-desc">Controle operacional completo. Dispomos de frota e perfuratrizes de última geração para entrega de alta capacidade sem terceirizações.</p>
+                </div>
+                
+                <!-- Filter Controls -->
+                <div class="filter-controls text-center reveal-fade">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="perfuratrizes">Perfuratrizes (MND)</button>
+                    <button class="filter-btn" data-filter="frota">Logística e Frota</button>
+                    <button class="filter-btn" data-filter="sede">Sede e Tecnologia</button>
+                </div>
+                
+                <!-- Masonry Gallery -->
+                <div class="gallery-grid reveal-fade-up">
+                    <!-- Item 1 - Perfuratriz -->
+                    <div class="gallery-item perfuratrizes" data-src="15.jpeg">
+                        <img src="15.jpeg" alt="Perfuratriz MND de alta performance no galpão">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span>Perfuratriz</span>
+                                <h4>Máquina Perfuratriz MND</h4>
+                            </div>
+                            <div class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 - Frota -->
+                    <div class="gallery-item frota" data-src="7.jpeg">
+                        <img src="7.jpeg" alt="Caminhão Mercedes Workdrill transportando perfuratriz">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span>Logística</span>
+                                <h4>Caminhão Mercedes-Benz Atego 3030</h4>
+                            </div>
+                            <div class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3 - Perfuratriz -->
+                    <div class="gallery-item perfuratrizes" data-src="16.jpeg">
+                        <img src="16.jpeg" alt="Perfuratriz amarela XCMG XZ230E no galpão">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span>Perfuratriz</span>
+                                <h4>XCMG XZ230E Direcional</h4>
+                            </div>
+                            <div class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 4 - Sede -->
+                    <div class="gallery-item sede" data-src="4.jpeg">
+                        <img src="4.jpeg" alt="Escritório interno corporativo">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span>Sede</span>
+                                <h4>Escritório Corporativo</h4>
+                            </div>
+                            <div class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 5 - Perfuratriz -->
+                    <div class="gallery-item perfuratrizes" data-src="14.jpeg">
+                        <img src="14.jpeg" alt="Equipamento de perfuração no hangar">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span>Equipamento</span>
+                                <h4>Sistema de Perfuração Pesada</h4>
+                            </div>
+                            <div class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 6 - Frota -->
+                    <div class="gallery-item frota" data-src="8.jpeg">
+                        <img src="8.jpeg" alt="Caminhão guindaste transportando bobinas de subducto">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span>Logística</span>
+                                <h4>Caminhão Munck e Carregamento</h4>
+                            </div>
+                            <div class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- Item 7 - Operação Real -->
+                    <div class="gallery-item perfuratrizes" data-src="5.jpeg">
+                        <img src="5.jpeg" alt="Instalação de rede subterrânea no condomínio logístico GLP Bandeirantes">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span>Operação</span>
+                                <h4>GLP Bandeirantes - Rod. Edgar Máximo Zambotto</h4>
+                            </div>
+                            <div class="gallery-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OPERAÇÕES REAIS EM CAMPO -->
+        <section id="operacoes" class="section-padding bg-secondary operations-section">
+            <div class="container">
+                <div class="section-header text-center reveal-fade">
+                    <span class="section-tag">Engenharia em Prática</span>
+                    <h2 class="section-title">Operações Reais em Campo</h2>
+                    <p class="section-subtitle">Registros reais de nossas equipes operando com precisão e segurança em vias de tráfego denso e rodovias.</p>
+                </div>
+                
+                <div class="grid grid-2-col align-center text-left">
+                    <div class="operations-carousel-container reveal-left">
+                        <!-- Custom Parallax Image Slider -->
+                        <div class="op-slider-wrapper">
+                            <div class="op-slide active" style="background-image: url('17.jpeg')" data-caption="Operação MND em via pública - Rua Haddock Lobo (São Paulo)"></div>
+                            <div class="op-slide" style="background-image: url('12.jpeg')" data-caption="Perfuração em calçada com monitoramento digital - Alphaville (Santana de Parnaíba)"></div>
+                            <div class="op-slide" style="background-image: url('1.jpeg')" data-caption="Acoplamento de alargador para puxamento de rede subterrânea - São Paulo"></div>
+                            <div class="op-slide" style="background-image: url('10.jpeg')" data-caption="Instalação de tubulação PEAD em vala urbana executada - São Paulo"></div>
+                            
+                            <div class="op-slider-nav">
+                                <button id="opPrev" class="op-nav-btn"><i class="fa-solid fa-arrow-left"></i></button>
+                                <button id="opNext" class="op-nav-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                            
+                            <div class="op-slider-caption">Operação MND em via pública - Rua Haddock Lobo (São Paulo)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="operations-details reveal-right">
+                        <h3>Precisão Cirúrgica em Áreas de Alta Complexidade</h3>
+                        <p class="operations-text">
+                            A implantação de infraestrutura subterrânea exige precisão e telemetria avançada. Nossa equipe de navegação monitora em tempo real a trajetória e a inclinação da broca piloto, evitando interferências.
+                        </p>
+                        
+                        <div class="locations-tag-grid">
+                            <div class="location-tag"><i class="fa-solid fa-location-dot"></i> Tamboré (SP)</div>
+                            <div class="location-tag"><i class="fa-solid fa-location-dot"></i> Guarulhos (SP)</div>
+                            <div class="location-tag"><i class="fa-solid fa-location-dot"></i> São Paulo (SP)</div>
+                            <div class="location-tag"><i class="fa-solid fa-location-dot"></i> Hortolândia (SP)</div>
+                        </div>
+                        
+                        <div class="operations-milestones">
+                            <div class="op-milestone">
+                                <span class="op-num">01</span>
+                                <div>
+                                    <h4>Georadar e Mapeamento</h4>
+                                    <p>Mapeamento e varredura prévia com Georadar (GPR) para identificação tridimensional de tubulações existentes.</p>
+                                </div>
+                            </div>
+                            <div class="op-milestone">
+                                <span class="op-num">02</span>
+                                <div>
+                                    <h4>Perfuração Piloto</h4>
+                                    <p>Abertura do furo piloto direcional guiado eletronicamente por sonda e receptor digital.</p>
+                                </div>
+                            </div>
+                            <div class="op-milestone">
+                                <span class="op-num">03</span>
+                                <div>
+                                    <h4>Alargamento e Puxamento</h4>
+                                    <p>Alargamento progressivo do túnel e instalação por tração controlada do duto PEAD, preservando sua integridade estrutural.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DIFERENCIAIS -->
+        <section class="section-padding differentials-section">
+            <div class="container">
+                <div class="section-header text-center reveal-fade">
+                    <span class="section-tag">Nossos Valores</span>
+                    <h2 class="section-title">Por Que a Workdrill?</h2>
+                    <p class="section-desc">Construímos infraestrutura crítica com foco absoluto em segurança, prazo e tecnologia de ponta.</p>
+                </div>
+                
+                <div class="differentials-grid grid grid-3-col reveal-fade-up">
+                    <div class="diff-card">
+                        <div class="diff-icon"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3>Segurança Jurídica e CLT</h3>
+                        <p>Corpo operacional próprio certificado em todas as normas regulamentadoras (NRs), garantindo estabilidade, conformidade legal e qualidade em campo.</p>
+                    </div>
+                    
+                    <div class="diff-card">
+                        <div class="diff-icon"><i class="fa-solid fa-gears"></i></div>
+                        <h3>Maquinário Próprio Avançado</h3>
+                        <p>Frota robusta composta por perfuratrizes direcionais de alta potência, localizadores Digitrak F5 e caminhões de suporte logístico de propriedade da Workdrill.</p>
+                    </div>
+                    
+                    <div class="diff-card">
+                        <div class="diff-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                        <h3>Prontidão e Logística</h3>
+                        <p>Logística integrada com ampla capilaridade no estado de São Paulo, assegurando estabilidade nos prazos e excelência nas entregas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIENTES CAROUSEL -->
+        <section id="clientes" class="section-padding-sm bg-secondary clients-section reveal-fade">
+            <div class="container">
+                <h3 class="clients-title text-center">Parceiros e Concessionárias que Confiam na Workdrill</h3>
+                
+                <!-- Infinite Logo Marquee -->
+                <div class="marquee-container">
+                    <div class="marquee-track">
+                        <!-- Group 1 -->
+                        <div class="client-logo">Megatelecom</div>
+                        <div class="client-logo">Algar Telecom</div>
+                        <div class="client-logo">Procisa</div>
+                        <div class="client-logo">Telemont</div>
+                        <div class="client-logo">Ability</div>
+                        <div class="client-logo">Ufinet</div>
+                        <div class="client-logo">Serede</div>
+                        <div class="client-logo">Rede Conecta</div>
+                        
+                        <!-- Group 2 (Duplicate for Infinite Scroll) -->
+                        <div class="client-logo">Megatelecom</div>
+                        <div class="client-logo">Algar Telecom</div>
+                        <div class="client-logo">Procisa</div>
+                        <div class="client-logo">Telemont</div>
+                        <div class="client-logo">Ability</div>
+                        <div class="client-logo">Ufinet</div>
+                        <div class="client-logo">Serede</div>
+                        <div class="client-logo">Rede Conecta</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTATO & ORÇAMENTO -->
+        <section id="contato" class="section-padding contact-section">
+            <div class="container">
+                <div class="grid grid-2-col">
+                    <div class="contact-info reveal-left">
+                        <span class="section-tag">Fale Conosco</span>
+                        <h2 class="section-title">Estamos Prontos para o Seu Projeto</h2>
+                        <p class="section-desc">Entre em contato para alinhar especificações técnicas, solicitar propostas ou agendar uma reunião comercial.</p>
+                        
+                        <div class="contact-details">
+                            <a href="https://wa.me/5511963246472" target="_blank" class="contact-item">
+                                <div class="contact-icon whatsapp-color"><i class="fa-brands fa-whatsapp"></i></div>
+                                <div>
+                                    <span>WhatsApp Direct</span>
+                                    <strong>(11) 96324-6472</strong>
+                                </div>
+                            </a>
+                            
+                            <a href="tel:+551143210036" class="contact-item">
+                                <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <span>Telefone Corporativo</span>
+                                    <strong>(11) 4321-0036</strong>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:joelsonvieira@workdrill.com.br" class="contact-item">
+                                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <span>E-mail Institucional</span>
+                                    <strong>joelsonvieira@workdrill.com.br</strong>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Styled Map Container Leaflet.js -->
+                        <div class="map-wrapper">
+                            <div class="map-overlay-title">Área de Atendimento Principal</div>
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container reveal-right">
+                        <div class="glass-form-card">
+                            <h3>Solicitar Orçamento</h3>
+                            <form id="contactForm" action="#" method="POST">
+                                <div class="form-group">
+                                    <input type="text" id="name" name="name" required placeholder=" ">
+                                    <label for="name">Nome Completo</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" required placeholder=" ">
+                                    <label for="email">E-mail Corporativo</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="phone" name="phone" required placeholder=" ">
+                                    <label for="phone">Telefone / Celular</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="company" name="company" placeholder=" ">
+                                    <label for="company">Empresa</label>
+                                </div>
+                                <div class="form-group">
+                                    <select id="service-select" name="service" required>
+                                        <option value="" disabled selected hidden></option>
+                                        <option value="mnd">Perfuração Horizontal Dirigida (MND)</option>
+                                        <option value="dutos">Instalação de Dutos (MND/MD)</option>
+                                        <option value="lançamento">Lançamento de Cabos Ópticos</option>
+                                        <option value="mapeamento">Mapeamento / Georadar (GPR)</option>
+                                        <option value="outros">Outros Serviços</option>
+                                    </select>
+                                    <label for="service-select" class="select-label">Serviço de Interesse</label>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
+                                    <label for="message">Mensagem ou Detalhes da Obra</label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-block btn-submit">
+                                    Enviar Mensagem <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </form>
+                            <div id="formFeedback" class="form-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-top container">
+            <div class="footer-brand">
+                <a href="#home" class="brand-logo">
+                    <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="41" fill="none" stroke="currentColor" stroke-width="4"/>
+                        <path d="M32,68 L68,32" stroke="currentColor" stroke-width="5"/>
+                        <path d="M68,68 L32,32" stroke="currentColor" stroke-width="5"/>
+                    </svg>
+                    <span class="brand-text">WORKDRILL</span>
+                </a>
+                <p>Especialistas em construção de redes subterrâneas e engenharia pesada de alta performance.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Menu Rápido</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#quem-somos">Quem Somos</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#estrutura">Estrutura</a></li>
+                    <li><a href="#operacoes">Operações</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-services-links">
+                <h4>Nossos Serviços</h4>
+                <ul>
+                    <li><a href="#servicos">Perfuração MND</a></li>
+                    <li><a href="#servicos">Instalação de Dutos</a></li>
+                    <li><a href="#servicos">Lançamento Óptico</a></li>
+                    <li><a href="#servicos">Mapeamento Georadar</a></li>
+                    <li><a href="#servicos">Fusão de Fibra</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Contatos Oficiais</h4>
+                <p><i class="fa-solid fa-envelope"></i> joelsonvieira@workdrill.com.br</p>
+                <p><i class="fa-solid fa-phone"></i> (11) 4321-0036</p>
+                <p><i class="fa-solid fa-location-dot"></i> São Paulo, SP, Brasil</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>&copy; 2026 WORKDRILL Construções de Rede Subterrânea. Todos os direitos reservados.</p>
+                <p>CNPJ / CREA Ativos e Regularizados em São Paulo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/5511963246472" class="whatsapp-float" target="_blank" aria-label="Fale conosco no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Solicitar Orçamento</span>
+    </a>
+
+    <!-- SERVICE DETAIL MODAL -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content glassmorphism">
+            <button class="modal-close" aria-label="Fechar Modal">&times;</button>
+            <div class="modal-body-layout">
+                <div class="modal-image" id="modalImage"></div>
+                <div class="modal-info">
+                    <span class="modal-tag" id="modalTag">Serviço</span>
+                    <h3 id="modalTitle">Título do Serviço</h3>
+                    <div id="modalDescription">Descrição detalhada do serviço...</div>
+                    <div class="modal-actions">
+                        <a href="#contato" class="btn btn-primary modal-btn-contact">Orçar este Serviço</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY -->
+    <div id="lightboxModal" class="lightbox">
+        <button class="lightbox-close" aria-label="Fechar Galeria">&times;</button>
+        <button class="lightbox-prev" aria-label="Imagem Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="lightbox-next" aria-label="Próxima Imagem"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="lightbox-content">
+            <img id="lightboxImg" src="" alt="Imagem ampliada">
+            <div id="lightboxCaption" class="lightbox-caption">Legenda da Imagem</div>
+        </div>
+    </div>
+
+    <!-- Leaflet.js Script -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
