@@ -1806,8 +1806,9 @@ a {
     }
     
     .stats-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         gap: 2rem;
     }
     
@@ -1924,8 +1925,22 @@ a {
     }
 
     .stats-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 2rem;
+        padding: 0 1.5rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .stats-container::-webkit-scrollbar {
+        display: none;
+    }
+    .stat-item {
+        flex: 0 0 180px;
+        scroll-snap-align: start;
     }
     
     .timeline::before {
