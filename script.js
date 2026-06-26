@@ -487,31 +487,44 @@ document.addEventListener('DOMContentLoaded', () => {
             formFeedback.classList.remove('success', 'error');
             formFeedback.textContent = '';
             
-            // Simulate AJAX request (2 seconds)
-            setTimeout(() => {
-                // Reset form inputs
-                contactForm.reset();
-                
-                // Show feedback success
-                formFeedback.classList.add('success');
-                formFeedback.textContent = 'Orçamento solicitado com sucesso! Nossa equipe entrará em contato em breve.';
-                
+            // Send real AJAX request to FormSubmit
+            fetch('https://formsubmit.co/ajax/joelsonvieira@workdrill.com.br', {
+                method: 'POST',
+                body: new FormData(contactForm)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success === 'true' || data.success === true) {
+                    // Reset form inputs
+                    contactForm.reset();
+                    
+                    // Show feedback success
+                    formFeedback.classList.add('success');
+                    formFeedback.textContent = 'Orçamento solicitado com sucesso! Nossa equipe entrará em contato em breve.';
+                } else {
+                    throw new Error('Erro no envio.');
+                }
+            })
+            .catch(error => {
+                formFeedback.classList.add('error');
+                formFeedback.textContent = 'Desculpe, ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato direto por e-mail.';
+            })
+            .finally(() => {
                 // Restore button state
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('loading');
                 submitBtn.innerHTML = 'Enviar Mensagem <i class="fa-solid fa-paper-plane"></i>';
                 
-                // Clear success message after 5 seconds
+                // Clear success/error message after 5 seconds
                 setTimeout(() => {
                     formFeedback.style.opacity = '0';
                     setTimeout(() => {
                         formFeedback.textContent = '';
-                        formFeedback.classList.remove('success');
+                        formFeedback.classList.remove('success', 'error');
                         formFeedback.style.opacity = '1';
                     }, 300);
                 }, 5000);
-                
-            }, 2000);
+            });
         });
     }
 });
