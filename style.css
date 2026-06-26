@@ -1787,10 +1787,14 @@ a {
         min-height: 100vh;
         padding-top: 120px;
         padding-bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     
     .hero-content {
         margin-bottom: 0;
+        width: 100%;
     }
     
     .hero-stats {
@@ -1798,11 +1802,13 @@ a {
         bottom: auto;
         left: auto;
         margin-top: 5rem;
+        width: 100%;
     }
     
     .stats-container {
-        flex-direction: column;
-        gap: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
     }
     
     .about-visual {
@@ -1915,6 +1921,11 @@ a {
     
     .grid-3-col, .grid-2-col, .gallery-grid {
         grid-template-columns: 1fr;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .timeline::before {
