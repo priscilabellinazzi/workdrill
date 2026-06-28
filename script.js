@@ -1,3 +1,6 @@
+history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================
@@ -151,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Instalação de Dutos",
             tag: "Infraestrutura Subterrânea",
             img: "2.jpeg",
-            desc: "Instalação de dutos plásticos e metálicos utilizando métodos destrutivos (MD) e não destrutivos (MND).<br><br>Atendemos integralmente concessionárias dos setores de telecomunicações, saneamento básico, gás canalizado e distribuição elétrica. Nossos serviços englobam a preparação da vala, o assentamento seguro e a execução de soldagem PEAD por termofusão e eletrofusão por profissionais altamente qualificados."
+            desc: "Instalação de dutos plásticos e metálicos utilizando métodos destrutivos (MD) e não destrutivos (MND).<br><br>Atendemos integralmente concessionárias dos setores de telecomunicações, saneamento básico, gás canalizado e distribuição elétrica. Nossos serviços englobam a preparação da vala, o assentamento seguro e a execução de soldagem PEAD (Polietileno de Alta Densidade) por termofusão e eletrofusão por profissionais altamente qualificados."
         },
         redes: {
             title: "Redes Subterrâneas",
@@ -169,13 +172,13 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Infraestrutura Óptica",
             tag: "Telecomunicações",
             img: "9.jpeg",
-            desc: "Projetos de implantação de redes backbone metropolitanas e de última milha (FTTH/FTTB).<br><br>Planejamos e executamos rotas de alta capacidade, canalizações protegidas, preparação de galerias subterrâneas e anéis ópticos robustos para operadoras de telecomunicações e grandes provedores de internet (ISPs)."
+            desc: "Projetos de implantação de redes backbone metropolitanas e de última milha - FTTH/FTTB (Fiber to the Home / Fiber to the Building).<br><br>Planejamos e executamos rotas de alta capacidade, canalizações protegidas, preparação de galerias subterrâneas e anéis ópticos robustos para operadoras de telecomunicações e grandes provedores de internet (ISPs)."
         },
         fusao: {
             title: "Fusão de Fibra Óptica",
             tag: "Tecnologia e Precisão",
             img: "15.jpeg",
-            desc: "Emendas de fibra óptica por arco voltaico com alinhamento preciso pelo núcleo da fibra.<br><br>Nossos técnicos de fusão realizam o preparo completo do cabo (decapagem, limpeza química e clivagem milimétrica) e efetuam a fusão garantindo taxas mínimas de atenuação. Realizamos testes com certificação por OTDR e Power Meter, gerando relatórios de qualidade."
+            desc: "Emendas de fibra óptica por arco voltaico com alinhamento preciso pelo núcleo da fibra.<br><br>Nossos técnicos de fusão realizam o preparo completo do cabo (decapagem, limpeza química e clivagem milimétrica) e efetuam a fusão garantindo taxas mínimas de atenuação. Realizamos testes com certificação por OTDR (Optical Time-Domain Reflectometer) e Power Meter, gerando relatórios de qualidade."
         },
         mapeamento: {
             title: "Mapeamento Subterrâneo",
@@ -184,10 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Localização precisa de interferências no subsolo antes da execução de perfurações.<br><br>Realizamos a detecção de dutos de gás, cabos elétricos energizados, redes de esgoto e galerias de água pluvial. Fornecemos plantas técnicas detalhadas e marcações na superfície para orientar com total segurança as equipes de perfuração."
         },
         georadar: {
-            title: "Georadar (GPR)",
+            title: "Georadar - GPR (Ground Penetrating Radar)",
             tag: "Tecnologia Avançada",
             img: "1.jpeg",
-            desc: "Varredura do solo com Ground Penetrating Radar (GPR) utilizando antenas eletromagnéticas de alta frequência (1 a 1000 MHz).<br><br>O sistema de georadar escaneia o subsolo em profundidades variadas, detectando anomalias geológicas, tubulações plásticas, metálicas e outras interferências ocultas de forma não destrutiva, garantindo precisão milimétrica para o planejamento do furo."
+            desc: "Varredura do solo com GPR (Ground Penetrating Radar) utilizando antenas eletromagnéticas de alta frequência (1 a 1000 MHz).<br><br>O sistema de georadar escaneia o subsolo em profundidades variadas, detectando anomalias geológicas, tubulações plásticas, metálicas e outras interferências ocultas de forma não destrutiva, garantindo precisão milimétrica para o planejamento do furo."
         },
         caixas: {
             title: "Instalação de Caixas Subterrâneas",
@@ -199,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Conectorização de Cabos",
             tag: "Redes e TI",
             img: "3.jpeg",
-            desc: "Terminação e conexão de cabos ópticos em distribuidores internos ópticos (DIO) e caixas de emenda ópticas (CEO).<br><br>Montagem e crimpagem de conectores rápidos e pig-tails. Nossos serviços garantem conexões estáveis para redes de voz, dados de alta velocidade e transmissão de sinal audiovisual corporativo."
+            desc: "Terminação e conexão de cabos ópticos em distribuidores internos ópticos - DIO e caixas de emenda ópticas - CEO.<br><br>Montagem e crimpagem de conectores rápidos e pig-tails. Nossos serviços garantem conexões estáveis para redes de voz, dados de alta velocidade e transmissão de sinal audiovisual corporativo."
         },
         "projetos-tecnicos": {
             title: "Projetos Técnicos",
@@ -389,8 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mapContainer) {
         // Central São Paulo coordinates
         const map = L.map('map', {
-            center: [-23.5505, -46.6333],
-            zoom: 9,
+            center: [-14.235, -51.9253], // Brazil center
+            zoom: 4,
             scrollWheelZoom: false
         });
 
@@ -411,11 +414,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Key Workdrill operational spots (from PDF & photos coordinates)
         const spots = [
-            { name: "Av. Aruanã, Tamboré (Barueri)", coords: [-23.4984, -46.8291], desc: "Obra de Redes Subterrâneas e perfuração MND executada." },
-            { name: "R. Minnie Ilda Perman, Guarulhos", coords: [-23.4542, -46.5312], desc: "Lançamento de dutos PEAD e travessia subterrânea." },
-            { name: "Rua Haddock Lobo, São Paulo", coords: [-23.5645, -46.6685], desc: "Operação real MND com perfuratriz amarela e alargador em ação." },
-            { name: "R. José Arten, Hortolândia", coords: [-22.8631, -47.2183], desc: "Perfuração com Astec e infraestrutura de alta performance." },
-            { name: "Av. Vanderlei Silveira, Franca", coords: [-20.5337, -47.4006], desc: "Lançamento de subductos e bobinas com caminhão Munck." }
+            { name: "São Paulo, SP", coords: [-23.5505, -46.6333], desc: "Operação real MND (Método Não Destrutivo) em grande centro urbano." },
+            { name: "Rio de Janeiro, RJ", coords: [-22.9068, -43.1729], desc: "Obras de Redes Subterrâneas e expansão de infraestrutura." },
+            { name: "Belo Horizonte, MG", coords: [-19.9167, -43.9345], desc: "Lançamento de dutos PEAD (Polietileno de Alta Densidade) e travessia subterrânea." },
+            { name: "Curitiba, PR", coords: [-25.4284, -49.2733], desc: "Perfuração direcional e implantação de redes de fibra." },
+            { name: "Brasília, DF", coords: [-15.7942, -47.8822], desc: "Projetos técnicos e mapeamento de redes críticas." }
         ];
 
         spots.forEach(spot => {
