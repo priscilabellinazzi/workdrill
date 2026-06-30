@@ -490,12 +490,20 @@ document.addEventListener('DOMContentLoaded', () => {
             formFeedback.classList.remove('success', 'error');
             formFeedback.textContent = '';
             
-            // Send real AJAX request to FormSubmit
-            fetch('https://formsubmit.co/ajax/joelsonvieira@workdrill.com.br', {
+            // Send real AJAX request to FormSubmit with Token
+            fetch('https://formsubmit.co/ajax/3a08a490e9b8f6b673f6cb8df121b3c6', {
                 method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
                 body: new FormData(contactForm)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success === 'true' || data.success === true) {
                     // Reset form inputs
@@ -504,11 +512,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Show feedback success
                     formFeedback.classList.add('success');
                     formFeedback.textContent = 'Orçamento solicitado com sucesso! Nossa equipe entrará em contato em breve.';
+                } else if (data.message && data.message.includes('needs Activation')) {
+                    contactForm.reset();
+                    formFeedback.classList.add('success');
+                    formFeedback.textContent = 'AVISO: Por segurança, o sistema antispam foi atualizado. Um novo e-mail de ativação foi enviado para a caixa de entrada (joelsonvieira...). Clique no botão "Activate Form" no novo e-mail recebido agora.';
                 } else {
-                    throw new Error('Erro no envio.');
+                    console.error('FormSubmit error data:', data);
+                    throw new Error(data.message || 'Erro no envio.');
                 }
             })
             .catch(error => {
+                console.error('Fetch error:', error);
                 formFeedback.classList.add('error');
                 formFeedback.textContent = 'Desculpe, ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato direto por e-mail.';
             })
