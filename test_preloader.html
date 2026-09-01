@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workdrill - Exact Vector WD Logo & Pure Black Preloader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #000000;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .preloader-wrapper {
+            position: fixed;
+            inset: 0;
+            background-color: #000000; /* Pure Black Background */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            max-width: 440px;
+            padding: 0 20px;
+        }
+
+        /* EXACT VECTOR WD LOGO */
+        .wd-exact-svg {
+            width: 145px;
+            height: auto;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .brand-name {
+            font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.38em;
+            color: #ffffff;
+            margin-bottom: 6px;
+            text-indent: 0.38em;
+            text-transform: uppercase;
+        }
+
+        .brand-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.34em;
+            color: #d4a34b; /* Gold/Beige matching the accent */
+            margin-bottom: 38px;
+            text-indent: 0.34em;
+            text-transform: uppercase;
+        }
+
+        .progress-track {
+            width: 290px;
+            max-width: 85vw;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-fill {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            width: 55%;
+            background: linear-gradient(90deg, #00b359 0%, #00e676 60%, #69f0ae 100%);
+            border-radius: 2px;
+            box-shadow: 0 0 12px rgba(0, 230, 118, 0.7), 0 0 4px rgba(105, 240, 174, 0.9);
+            transition: width 0.12s ease-out;
+        }
+
+        .progress-spark {
+            position: absolute;
+            right: -2px; top: 50%;
+            transform: translateY(-50%);
+            width: 4px; height: 4px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 6px 2px #ffffff, 0 0 14px 4px rgba(0, 230, 118, 0.9), 0 0 24px 8px rgba(0, 230, 118, 0.4);
+        }
+
+        .loading-text {
+            font-size: 9.5px;
+            font-weight: 500;
+            letter-spacing: 0.42em;
+            color: #717885;
+            text-indent: 0.42em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader-wrapper">
+        <div class="preloader-inner">
+            
+            <!-- Official Transparent WD Logo (Green Accent) -->
+            <img src="logo-wd.png" alt="Workdrill Logo" style="width: 155px; height: auto; margin-bottom: 24px; display: block;">
+
+            <!-- Brand Typography -->
+            <div class="brand-name">WORKDRILL</div>
+            <div class="brand-subtitle">SOLUÇÕES EM PERFURAÇÃO</div>
+
+            <!-- Progress Bar -->
+            <div class="progress-track">
+                <div class="progress-bar-fill" id="pBar">
+                    <div class="progress-spark"></div>
+                </div>
+            </div>
+
+            <!-- Status Text -->
+            <div class="loading-text">CARREGANDO...</div>
+
+        </div>
+    </div>
+
+    <script>
+        const bar = document.getElementById('pBar');
+        let progress = 0;
+        setInterval(() => {
+            progress = (progress + 1) % 105;
+            bar.style.width = Math.min(progress, 100) + '%';
+        }, 50);
+    </script>
+</body>
+</html>
